@@ -1,0 +1,18 @@
+package com.ecommerce.user.kafka;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
+
+@Slf4j
+@Service
+public class UserEventConsumer {
+
+    @KafkaListener(topics = "user-created", groupId = "user-group")
+    public void consume(String username) {
+
+        log.info("Kafka event received for user: {}", username);
+
+        // future logic
+    }
+}
