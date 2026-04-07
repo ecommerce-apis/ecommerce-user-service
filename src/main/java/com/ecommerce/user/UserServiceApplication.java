@@ -3,6 +3,8 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.kafka.annotation.EnableKafka;
+
+import java.util.Objects;
 import java.util.TimeZone;
 @SpringBootApplication
 @EnableKafka
@@ -20,10 +22,10 @@ public class UserServiceApplication {
         io.github.cdimascio.dotenv.Dotenv dotenv = io.github.cdimascio.dotenv.Dotenv.load();
 
         // Set environment variables for Spring Boot
-        System.setProperty("JWT_SECRET", dotenv.get("JWT_SECRET"));
-        System.setProperty("DB_URL", dotenv.get("DB_URL"));
-        System.setProperty("DB_USER", dotenv.get("DB_USER"));
-        System.setProperty("DB_PASS", dotenv.get("DB_PASS"));
+        System.setProperty("JWT_SECRET", Objects.requireNonNull(dotenv.get("JWT_SECRET")));
+        System.setProperty("DB_URL", Objects.requireNonNull(dotenv.get("DB_URL")));
+        System.setProperty("DB_USER", Objects.requireNonNull(dotenv.get("DB_USER")));
+        System.setProperty("DB_PASS", Objects.requireNonNull(dotenv.get("DB_PASS")));
 
         SpringApplication.run(UserServiceApplication.class, args);
     }
